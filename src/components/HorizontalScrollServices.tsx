@@ -109,7 +109,6 @@ export default function HorizontalScrollServices() {
         {/* Slide 2+ : The Service Cards */}
         <div className="flex h-full items-center pr-12 md:pr-24">
           {services.map((service, index) => {
-            const Icon = service.icon;
             return (
               <div
                 key={index}
