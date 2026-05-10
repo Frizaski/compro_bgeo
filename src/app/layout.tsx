@@ -11,7 +11,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "BGEO | Modern Scrollytelling Company Profile",
+  title: "BGEO DEV",
   description: "Company profile for BGEO featuring dynamic scrollytelling.",
 };
 
