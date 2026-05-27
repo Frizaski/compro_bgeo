@@ -4,48 +4,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const HISTORY_DATA = [
-  {
-    id: "01",
-    title: "The Beginning",
-    subtitle: "Where It All Started",
-    image: "/assets/journey/1.jpeg",
-    desc: "BGEO started from a simple collaboration between team members who worked on a company profile website project for a client."
-  },
-  {
-    id: "02",
-    title: "Building the Identity",
-    subtitle: "Creating BGEO",
-    image: "/assets/journey/2.jpeg",
-    desc: "To look more professional and structured as a team, we created the name “BGEO” inspired by DGeo, a startup founded by one of our member’s family."
-  },
-  {
-    id: "03",
-    title: "Bigger Opportunities",
-    subtitle: "Developing OPS",
-    image: "/assets/journey/3.jpeg",
-    desc: "We began working on a larger-scale project called OPS (Operational Patrolling System), a monitoring system for operational staff such as security and cleaning services."
-  },
-  {
-    id: "04",
-    title: "Entering the Startup",
-    subtitle: "Joining Startup School",
-    image: "/assets/journey/4.jpeg",
-    desc: "Seeing the opportunity to grow further, we joined IPB CDA Entrepreneurship Program through Startup School to strengthen our business and startup foundation."
-  },
-  {
-    id: "05",
-    title: "Beyond the Future",
-    subtitle: "Growing Beyond Limits",
-    image: "/assets/journey/5.jpeg",
-    desc: "Today, BGEO is growing into a serious digital startup focused on building impactful digital solutions and scalable technology for the future."
-  }
-];
-
 export default function HistorySection() {
+  const { history } = useSiteContent();
   const containerRef = useRef<HTMLElement>(null);
   const rightSectionsRef = useRef<(HTMLDivElement | null)[]>([]);
   const leftTextsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -100,13 +64,13 @@ export default function HistorySection() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full bg-[#050505] text-white">
+    <section ref={containerRef} className="relative w-full bg-[var(--background)] text-[var(--foreground)] transition-colors duration-500">
       {/* Desktop/Tablet Split Layout */}
       <div className="hidden md:flex w-full">
         {/* Left: Sticky Text Area */}
         <div className="w-[45%] h-screen sticky top-0 flex flex-col justify-center pl-12 lg:pl-24 z-20 pointer-events-none">
           <div className="relative w-full h-[40vh]">
-            {HISTORY_DATA.map((item, i) => (
+            {history.map((item, i) => (
               <div
                 key={item.id}
                 ref={(el) => { leftTextsRef.current[i] = el; }}
@@ -114,7 +78,7 @@ export default function HistorySection() {
               >
                 <div className="flex items-end gap-6 mb-4">
                   <span className="text-[var(--primary-green)] text-2xl font-medium font-mono">{item.id}</span>
-                  <div className="h-px w-16 bg-white/20 mb-3" />
+                  <div className="h-px w-16 bg-black/20 dark:bg-white/20 mb-3" />
                 </div>
                 <h2 className="text-5xl lg:text-7xl xl:text-8xl font-black tracking-tighter uppercase leading-[0.85] mb-6 drop-shadow-2xl">
                   {item.title}
@@ -122,7 +86,7 @@ export default function HistorySection() {
                 <h3 className="text-[var(--primary-green)] font-semibold text-xl md:text-2xl mb-2 tracking-wide">
                   {item.subtitle}
                 </h3>
-                <p className="text-gray-400 text-xl max-w-lg xl:max-w-xl whitespace-normal leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-400 text-xl max-w-lg xl:max-w-xl whitespace-normal leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -132,13 +96,13 @@ export default function HistorySection() {
 
         {/* Right: Scrolling Photos */}
         <div className="w-[55%] flex flex-col z-10 relative">
-          {HISTORY_DATA.map((item, i) => (
+          {history.map((item, i) => (
             <div
               key={i}
               ref={(el) => { rightSectionsRef.current[i] = el; }}
               className="h-screen w-full flex items-center justify-center p-12 lg:pr-32"
             >
-              <div className="relative w-full max-w-xl h-[70vh] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <div className="relative w-full max-w-xl h-[70vh] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -152,16 +116,16 @@ export default function HistorySection() {
 
       {/* Mobile Layout (Stacked) */}
       <div className="flex md:hidden flex-col w-full px-6 py-24 gap-32">
-        {HISTORY_DATA.map((item, i) => (
+        {history.map((item, i) => (
           <div key={i} className="flex flex-col gap-8">
             <div className="flex items-end gap-4">
               <span className="text-[var(--primary-green)] text-xl font-medium font-mono">{item.id}</span>
-              <div className="h-px w-8 bg-white/20 mb-3" />
+              <div className="h-px w-8 bg-black/20 dark:bg-white/20 mb-3" />
             </div>
             <h2 className="text-5xl font-black tracking-tighter uppercase leading-none drop-shadow-xl">
               {item.title}
             </h2>
-            <div className="relative w-full h-[50vh] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <div className="relative w-full h-[50vh] rounded-2xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10">
               <img
                 src={item.image}
                 alt={item.title}
@@ -172,7 +136,7 @@ export default function HistorySection() {
               <h3 className="text-[var(--primary-green)] font-semibold text-xl mb-2 tracking-wide">
                 {item.subtitle}
               </h3>
-              <p className="text-gray-400 text-lg">
+              <p className="text-gray-600 dark:text-gray-400 text-lg">
                 {item.desc}
               </p>
             </div>

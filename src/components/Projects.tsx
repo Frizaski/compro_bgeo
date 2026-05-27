@@ -5,52 +5,21 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    title: "CS Corp Company Profile Website",
-    category: "Website",
-    year: "2024",
-    color: "from-[#02CE13]/20 to-transparent",
-    image: "/assets/thumbnails/1.png",
-    technologies: ["React", "JavaScript", "CSS"],
-  },
-  {
-    title: "Operational Patrolling System (OPS)",
-    category: "Mobile Application",
-    year: "2023",
-    color: "from-[#356EE7]/20 to-transparent",
-    image: "/assets/thumbnails/2.png",
-    technologies: ["Flutter", "Firebase", "QR Technology"],
-  },
-  {
-    title: "FotoKAN Photobooth Website",
-    category: "Website",
-    year: "2023",
-    color: "from-[#02CE13]/20 to-[#356EE7]/20",
-    image: "/assets/thumbnails/3.png",
-    technologies: ["React", "Next.js", "Tailwind CSS"],
-  },
-  {
-    title: "Alumni IPB Jakarta Website",
-    category: "Community Platform Website",
-    year: "2024",
-    color: "from-[#356EE7]/20 to-transparent",
-    image: "/assets/thumbnails/4.png",
-    technologies: ["React", "Vite", "CSS"],
-  },
-];
-
 export default function Projects() {
+  const { projects } = useSiteContent();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const items = gsap.utils.toArray(".project-item");
+      const items = gsap.utils.toArray<HTMLElement>(".project-item");
 
-      items.forEach((item: any, i) => {
+      items.forEach((item) => {
         gsap.fromTo(
           item,
           { opacity: 0, y: 100 },
@@ -79,13 +48,13 @@ export default function Projects() {
             <h2 className="text-4xl md:text-6xl font-bold mb-4">
               Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-green)] to-[var(--primary-blue)]">Projects</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-xl">
+            <p className="text-gray-600 dark:text-gray-400 text-lg max-w-xl">
               A selection of our recent work across various industries, showcasing our commitment to excellence and innovation.
             </p>
           </div>
-          <button className="flex items-center gap-2 border border-black/20 dark:border-white/20 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+          <Link href="/projects" className="flex items-center gap-2 border border-black/20 dark:border-white/20 px-6 py-3 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
             View All Work <ArrowUpRight size={20} />
-          </button>
+          </Link>
         </div>
 
         <div className="flex flex-col gap-8">
@@ -99,11 +68,13 @@ export default function Projects() {
               <div className="relative p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-10 z-10">
                 
                 {/* Project Image */}
-                <div className="w-full md:w-[280px] h-[200px] md:h-[160px] rounded-2xl overflow-hidden shrink-0 shadow-lg border border-black/5 dark:border-white/5">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" 
+                <div className="relative w-full md:w-[280px] h-[200px] md:h-[160px] rounded-2xl overflow-hidden shrink-0 shadow-lg border border-black/5 dark:border-white/5">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(min-width: 768px) 280px, 100vw"
+                    className="object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
                 </div>
 
@@ -112,7 +83,7 @@ export default function Projects() {
                   <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 transition-colors duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--primary-green)] group-hover:to-[var(--primary-blue)]">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 text-lg">{project.category}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-lg">{project.category}</p>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {project.technologies.map((tech, i) => (
                       <span key={i} className="px-3 py-1 text-sm rounded-full bg-black/5 dark:bg-white/10 text-gray-500 dark:text-gray-400">
@@ -124,7 +95,7 @@ export default function Projects() {
                 
                 {/* Meta & Button */}
                 <div className="flex items-center justify-between md:justify-end gap-8 shrink-0 md:pl-4">
-                  <span className="text-2xl font-light text-gray-400 dark:text-gray-500">{project.year}</span>
+                  <span className="text-2xl font-light text-gray-600 dark:text-gray-500">{project.year}</span>
                   
                   <div className="h-16 w-16 shrink-0 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300 transform group-hover:-rotate-45">
                     <ArrowUpRight size={28} />

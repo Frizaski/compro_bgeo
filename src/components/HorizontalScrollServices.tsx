@@ -4,34 +4,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    title: "Web Development",
-    description: "Modern and responsive websites designed to strengthen your digital presence and business growth.",
-  },
-  {
-    title: "System Development",
-    description: "Custom digital systems tailored to streamline operations and improve business efficiency.",
-  },
-  {
-    title: "UI/UX Design",
-    description: "Clean, intuitive, and engaging user experiences crafted for modern digital products.",
-  },
-  {
-    title: "Digital Solutions",
-    description: "Innovative technology solutions that help businesses adapt and grow in the digital era.",
-  },
-  {
-    title: "Hosting & Maintenance",
-    description: "Reliable hosting and maintenance services to keep your digital assets running smoothly.",
-  }
-];
-
 export default function HorizontalScrollServices() {
+  const { services } = useSiteContent();
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
 

@@ -9,29 +9,35 @@ import TeamSection from "@/components/TeamSection";
 import InstagramFeed from "@/components/InstagramFeed";
 import FAQSection from "@/components/FAQSection";
 import ContactFooter from "@/components/ContactFooter";
+import { SiteContentProvider } from "@/hooks/useSiteContent";
+import { getSiteContent } from "@/lib/site-content";
 
-export default function Home() {
+export default async function Home() {
+  const content = await getSiteContent();
+
   return (
-    <main className="min-h-screen bg-[var(--background)]">
-      <Hero />
-      <AboutSection />
-      <HistorySection />
-      <VisionSection />
-      <HorizontalScrollServices />
-      <Projects />
-      
-      <div className="py-24 overflow-hidden">
-        <ScrollVelocity
-          texts={['Beyond Geo Beyond Limits', 'Scroll Down']} 
-          velocity={50} 
-          className="text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-green)] to-[var(--primary-blue)] mx-4"
-        />
-      </div>
+    <SiteContentProvider content={content}>
+      <main className="min-h-screen bg-[var(--background)]">
+        <Hero />
+        <AboutSection />
+        <HistorySection />
+        <VisionSection />
+        <HorizontalScrollServices />
+        <Projects />
 
-      <TeamSection />
-      <InstagramFeed />
-      <FAQSection />
-      <ContactFooter />
-    </main>
+        <div className="py-24 overflow-hidden">
+          <ScrollVelocity
+            texts={['Beyond Geo Beyond Limits', 'Scroll Down']}
+            velocity={50}
+            className="text-4xl md:text-6xl lg:text-8xl font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-green)] to-[var(--primary-blue)] mx-4"
+          />
+        </div>
+
+        <TeamSection />
+        <InstagramFeed />
+        <FAQSection />
+        <ContactFooter />
+      </main>
+    </SiteContentProvider>
   );
 }

@@ -5,33 +5,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const FAQ_DATA = [
-  {
-    question: "How much does it cost to create a website?",
-    answer: "The cost depends on the complexity, features, and scale of your project. We offer customized packages tailored to your specific needs and budget constraints."
-  },
-  {
-    question: "How long does it take to create a website?",
-    answer: "A standard company profile typically takes 2-4 weeks, while complex web applications may take several months. We will provide a detailed timeline during our initial consultation."
-  },
-  {
-    question: "Can hosting be included?",
-    answer: "Yes, we provide end-to-end solutions including reliable cloud hosting, domain registration, and ongoing server maintenance if required."
-  },
-  {
-    question: "Are there any additional costs for revisions?",
-    answer: "Our standard contracts include a set number of revision rounds. Any major structural changes requested after the approval phase may incur additional costs, which we will always communicate upfront."
-  },
-  {
-    question: "How do I order?",
-    answer: "You can reach out to us directly via our email or contact number below. We'll set up a brief discovery call to understand your needs and send you a formal proposal."
-  }
-];
-
 export default function FAQSection() {
+  const { faq } = useSiteContent();
   const containerRef = useRef<HTMLElement>(null);
   const word1Ref = useRef<HTMLSpanElement>(null);
   const word2Ref = useRef<HTMLSpanElement>(null);
@@ -86,7 +65,7 @@ export default function FAQSection() {
 
         {/* Right Side: Accordion */}
         <div className="w-full lg:w-7/12 flex flex-col gap-4 z-10">
-          {FAQ_DATA.map((item, index) => {
+          {faq.map((item, index) => {
             const isOpen = openIndex === index;
             
             return (

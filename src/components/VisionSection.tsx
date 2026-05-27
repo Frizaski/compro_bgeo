@@ -4,14 +4,15 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function VisionSection() {
+  const { visionText } = useSiteContent();
   const container = useRef<HTMLDivElement>(null);
 
-  const text = "NEXT BIG MOVE WITH BGEO AND BUILD BEYOND LIMITS";
-  const words = text.split(" ");
+  const words = visionText.split(" ");
 
   useGSAP(
     () => {

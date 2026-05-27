@@ -5,10 +5,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import Image from "next/image";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
+  const { about } = useSiteContent();
   const container = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -63,20 +65,16 @@ export default function AboutSection() {
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div ref={textRef}>
           <h2 className="text-sm font-bold tracking-widest uppercase text-[var(--primary-green)] mb-4 about-text">
-            About BGEO
+            {about.label}
           </h2>
           <h3 className="text-4xl md:text-5xl font-semibold mb-8 leading-tight about-text">
-            We build digital experiences that drive growth.
+            {about.heading}
           </h3>
-          <p className="text-gray-400 text-lg mb-6 about-text">
-            Founded from a passion for technology and creativity,
-            BGEO focuses on building impactful digital experiences
-            through website development, system development, and UI/UX design.
+          <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 about-text">
+            {about.paragraphOne}
           </p>
-          <p className="text-gray-400 text-lg about-text">
-            Our team collaborates to transform ideas into modern,
-            functional, and scalable solutions tailored to every
-            client’s needs.
+          <p className="text-gray-600 dark:text-gray-400 text-lg about-text">
+            {about.paragraphTwo}
           </p>
         </div>
 

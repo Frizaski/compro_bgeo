@@ -5,49 +5,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { Briefcase, Globe } from "lucide-react";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const teamMembers = [
-  {
-    name: "Cahya Ilham",
-    role: "Project Manager",
-    bio: "Leading projects with strategy and effective execution.",
-    image: "/assets/member/Cahya.jpeg",
-    instagram: "https://www.instagram.com/chyilhm/?hl=en", // Add Instagram link here
-    portfolio: "#", // Add Portfolio website link here
-    linkedin: "#",  // Add LinkedIn link here
-  },
-  {
-    name: "Faris Fadhil",
-    role: "Mobile & Back-End Developer",
-    bio: "Building scalable systems and seamless mobile experiences.",
-    image: "/assets/member/Fadhil.jpg",
-    instagram: "https://www.instagram.com/m_fdhillll/?hl=en", // Add Instagram link here
-    portfolio: "#", // Add Portfolio website link here
-    linkedin: "#",  // Add LinkedIn link here
-  },
-  {
-    name: "Rafi Alexander",
-    role: "Front-End Developer",
-    bio: "Crafting responsive and interactive web interfaces.",
-    image: "/assets/member/Alex.jpg",
-    instagram: "https://www.instagram.com/alexanderafi_/?hl=en", // Add Instagram link here
-    portfolio: "https://portofolio-alex-sigma.vercel.app/", // Add Portfolio website link here
-    linkedin: "#",  // Add LinkedIn link here
-  },
-  {
-    name: "Frizaski Al Fath",
-    role: "UI/UX Designer",
-    bio: "Designing modern and intuitive digital experiences.",
-    image: "/assets/member/Frizaski.jpg",
-    instagram: "https://www.instagram.com/frizaskii/?hl=en", // Add Instagram link here
-    portfolio: "https://portfoliofrizaski.vercel.app/", // Add Portfolio website link here
-    linkedin: "#",  // Add LinkedIn link here
-  },
-];
-
 export default function TeamSection() {
+  const { team } = useSiteContent();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -92,7 +55,7 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member, index) => (
+          {team.map((member, index) => (
             <div
               key={index}
               className="team-card group flex flex-col bg-white dark:bg-white/5 border border-black/15 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-none backdrop-blur-sm rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-black/10 dark:hover:shadow-white/5 transition-all duration-500 hover:-translate-y-2"
@@ -114,7 +77,7 @@ export default function TeamSection() {
                   <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[var(--primary-blue)] transition-colors">
                     <Briefcase size={20} />
                   </a>
-                  <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white dark:hover:text-white transition-colors">
+                  <a href={member.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-black dark:hover:text-white transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
